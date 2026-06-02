@@ -1,8 +1,10 @@
-<?php  
-require 'vendor/autoload.php';  
- = require 'bootstrap/app.php';  
- = - 
-- 
- = App\Models\User::where('email','manager@example.com')- 
- = - 
-echo \" "TOKEN:\;  ; php inspect.php ; del inspect.php
+<?php
+
+require 'vendor/autoload.php';
+
+$app = require 'bootstrap/app.php';
+
+$user = App\Models\User::where('email', 'manager@example.com')->first();
+
+echo "TOKEN:\n";
+print_r($user);

@@ -106,6 +106,19 @@
             @endif
             @yield('content')
         </div>
+
+        @auth
+            <footer class="border-top bg-white">
+                <div class="content-wrap mx-auto px-3 px-lg-4 py-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                    <div class="small text-muted-strong">
+                        PROGRAMACION AVANZADA - 2026 - P1 - PARALELO 1
+                    </div>
+                    <div class="small text-muted-strong">
+                        Integrantes: Adrian Mamani, Dario Mamani Cutile, Erick Jamil Limachi Mamani
+                    </div>
+                </div>
+            </footer>
+        @endauth
     </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
