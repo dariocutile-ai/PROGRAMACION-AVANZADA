@@ -4,7 +4,7 @@
 @section('page_title', 'Nueva categoria')
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('categories.store') }}">
         @include('categories._form')
     </form>

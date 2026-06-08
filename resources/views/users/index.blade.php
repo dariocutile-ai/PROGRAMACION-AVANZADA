@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Gestion completa con roles y permisos reales')
 
 @section('content')
-<div class="panel mb-3 p-3">
+<div class="github-panel mb-3 p-3">
     <form class="row g-2 align-items-end" method="get">
         <div class="col-md-5">
             <label class="form-label" for="q">Buscar</label>
@@ -21,15 +21,15 @@
             </select>
         </div>
         <div class="col-md-2 d-flex gap-2">
-            <button class="btn btn-outline-secondary flex-fill" type="submit"><i class="bi bi-search"></i></button>
+            <button class="btn btn-outline-secondary flex-fill github-btn" type="submit"><i class="bi bi-search"></i></button>
             @can('create', App\Models\User::class)
-                <a class="btn btn-primary flex-fill" href="{{ route('users.create') }}"><i class="bi bi-plus-lg"></i></a>
+                <a class="btn btn-primary flex-fill github-btn" href="{{ route('users.create') }}"><i class="bi bi-plus-lg"></i></a>
             @endcan
         </div>
     </form>
 </div>
 
-<div class="panel">
+<div class="github-panel">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead>
@@ -49,21 +49,21 @@
                     </td>
                     <td>
                         @forelse ($user->roles as $role)
-                            <span class="badge badge-soft">{{ $role->name }}</span>
+                            <span class="github-badge-soft">{{ $role->name }}</span>
                         @empty
                             <span class="text-muted">Sin rol</span>
                         @endforelse
                     </td>
                     <td>{{ $user->created_at?->format('Y-m-d') }}</td>
                     <td class="text-end">
-                        <a class="btn btn-outline-secondary btn-sm btn-icon" title="Ver" href="{{ route('users.show', $user) }}"><i class="bi bi-eye"></i></a>
+                        <a class="btn btn-outline-secondary btn-sm github-btn-icon" title="Ver" href="{{ route('users.show', $user) }}"><i class="bi bi-eye"></i></a>
                         @can('update', $user)
-                            <a class="btn btn-outline-primary btn-sm btn-icon" title="Editar" href="{{ route('users.edit', $user) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-outline-primary btn-sm github-btn-icon" title="Editar" href="{{ route('users.edit', $user) }}"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $user)
                             <form class="d-inline" method="post" action="{{ route('users.destroy', $user) }}" onsubmit="return confirm('Eliminar usuario?')">
                                 @csrf @method('delete')
-                                <button class="btn btn-outline-danger btn-sm btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-outline-danger btn-sm github-btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
                             </form>
                         @endcan
                     </td>

@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Catalogo con relaciones de categoria y proveedor')
 
 @section('content')
-<div class="panel mb-3 p-3">
+<div class="github-panel mb-3 p-3">
     <form class="row g-2 align-items-end" method="get">
         <div class="col-md-4">
             <label class="form-label" for="q">Buscar</label>
@@ -30,15 +30,15 @@
             </select>
         </div>
         <div class="col-md-2 d-flex gap-2">
-            <button class="btn btn-outline-secondary flex-fill" type="submit"><i class="bi bi-search"></i></button>
+            <button class="btn btn-outline-secondary flex-fill github-btn" type="submit"><i class="bi bi-search"></i></button>
             @can('create', App\Models\Product::class)
-                <a class="btn btn-primary flex-fill" href="{{ route('products.create') }}"><i class="bi bi-plus-lg"></i></a>
+                <a class="btn btn-primary flex-fill github-btn" href="{{ route('products.create') }}"><i class="bi bi-plus-lg"></i></a>
             @endcan
         </div>
     </form>
 </div>
 
-<div class="panel">
+<div class="github-panel">
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead>
@@ -54,7 +54,7 @@
                     <td>
                         <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
                         @if ($product->stock <= $product->reorder_level)
-                            <span class="badge text-bg-warning ms-1">Stock bajo</span>
+                            <span class="github-badge-soft ms-1" style="color: #E3B341; border-color: #E3B341;">Stock bajo</span>
                         @endif
                     </td>
                     <td>{{ $product->category?->name }}</td>
@@ -62,14 +62,14 @@
                     <td class="text-end">{{ $product->stock }}</td>
                     <td class="text-end">${{ number_format((float) $product->sale_price, 2) }}</td>
                     <td class="text-end">
-                        <a class="btn btn-outline-secondary btn-sm btn-icon" title="Ver" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a>
+                        <a class="btn btn-outline-secondary btn-sm github-btn-icon" title="Ver" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a>
                         @can('update', $product)
-                            <a class="btn btn-outline-primary btn-sm btn-icon" title="Editar" href="{{ route('products.edit', $product) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-outline-primary btn-sm github-btn-icon" title="Editar" href="{{ route('products.edit', $product) }}"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $product)
                             <form class="d-inline" method="post" action="{{ route('products.destroy', $product) }}" onsubmit="return confirm('Eliminar producto?')">
                                 @csrf @method('delete')
-                                <button class="btn btn-outline-danger btn-sm btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-outline-danger btn-sm github-btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
                             </form>
                         @endcan
                     </td>

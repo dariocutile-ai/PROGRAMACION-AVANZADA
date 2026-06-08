@@ -5,7 +5,7 @@
 @section('page_subtitle', $supplier->name)
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('suppliers.update', $supplier) }}">
         @method('put')
         @include('suppliers._form')

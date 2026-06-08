@@ -7,20 +7,22 @@
 @section('content')
 <div class="row g-3 mb-4">
     @foreach ([
-        ['label' => 'Productos', 'value' => $totals['products'], 'icon' => 'bi-boxes'],
-        ['label' => 'Categorias', 'value' => $totals['categories'], 'icon' => 'bi-tags'],
-        ['label' => 'Proveedores', 'value' => $totals['suppliers'], 'icon' => 'bi-truck'],
-        ['label' => 'Usuarios', 'value' => $totals['users'], 'icon' => 'bi-people'],
-        ['label' => 'Stock disponible', 'value' => $totals['stock'], 'icon' => 'bi-stack'],
-        ['label' => 'Stock bajo', 'value' => $totals['low_stock'], 'icon' => 'bi-exclamation-triangle'],
+        ['label' => 'Productos', 'value' => $totals['products'], 'icon' => 'bi-boxes', 'color' => '#2F81F7'],
+        ['label' => 'Categorias', 'value' => $totals['categories'], 'icon' => 'bi-tags', 'color' => '#A371F7'],
+        ['label' => 'Proveedores', 'value' => $totals['suppliers'], 'icon' => 'bi-truck', 'color' => '#238636'],
+        ['label' => 'Usuarios', 'value' => $totals['users'], 'icon' => 'bi-people', 'color' => '#D29922'],
+        ['label' => 'Stock disponible', 'value' => $totals['stock'], 'icon' => 'bi-stack', 'color' => '#2F81F7'],
+        ['label' => 'Stock bajo', 'value' => $totals['low_stock'], 'icon' => 'bi-exclamation-triangle', 'color' => '#DA3633'],
     ] as $metric)
         <div class="col-sm-6 col-xl-4">
-            <div class="metric p-3 d-flex justify-content-between align-items-center">
+            <div class="github-metric d-flex justify-content-between align-items-center">
                 <div>
-                    <div class="text-muted-strong small">{{ $metric['label'] }}</div>
-                    <div class="fs-3 fw-bold">{{ number_format($metric['value']) }}</div>
+                    <div class="text-muted small">{{ $metric['label'] }}</div>
+                    <div class="fs-3 fw-bold mt-1" style="color: #F0F6FC;">{{ number_format($metric['value']) }}</div>
                 </div>
-                <i class="bi {{ $metric['icon'] }} fs-2 text-secondary"></i>
+                <div class="icon-container" style="width: 48px; height: 48px; display: grid; place-items: center; background: {{ $metric['color'] }}20; border-radius: 6px;">
+                    <i class="bi {{ $metric['icon'] }} fs-3" style="color: {{ $metric['color'] }};"></i>
+                </div>
             </div>
         </div>
     @endforeach
@@ -28,10 +30,10 @@
 
 <div class="row g-4">
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-                <h2 class="h6 mb-0">Productos con stock bajo</h2>
-                <a href="{{ route('reports.index') }}" class="btn btn-outline-secondary btn-sm">Ver reporte</a>
+        <div class="github-panel">
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center" style="border-bottom-color: #30363D;">
+                <h2 class="h6 mb-0" style="color: #F0F6FC;">Productos con stock bajo</h2>
+                <a href="{{ route('reports.index') }}" class="btn btn-outline-secondary btn-sm github-btn">Ver reporte</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
@@ -53,11 +55,11 @@
         </div>
     </div>
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-                <h2 class="h6 mb-0">Ultimos movimientos</h2>
+        <div class="github-panel">
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center" style="border-bottom-color: #30363D;">
+                <h2 class="h6 mb-0" style="color: #F0F6FC;">Ultimos movimientos</h2>
                 @can('create', App\Models\InventoryMovement::class)
-                    <a href="{{ route('inventory.movements.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg me-1"></i>Registrar</a>
+                    <a href="{{ route('inventory.movements.create') }}" class="btn btn-primary btn-sm github-btn"><i class="bi bi-plus-lg me-1"></i>Registrar</a>
                 @endcan
             </div>
             <div class="table-responsive">
@@ -67,7 +69,7 @@
                     @forelse ($recentMovements as $movement)
                         <tr>
                             <td><a href="{{ route('inventory.movements.show', $movement) }}">{{ $movement->product?->name }}</a></td>
-                            <td><span class="badge badge-soft">{{ $movement->type }}</span></td>
+                            <td><span class="github-badge-soft">{{ $movement->type }}</span></td>
                             <td class="text-end">{{ $movement->quantity }}</td>
                             <td>{{ $movement->user?->name ?? 'Sistema' }}</td>
                         </tr>

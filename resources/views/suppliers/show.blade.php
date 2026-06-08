@@ -7,20 +7,20 @@
 @section('content')
 <div class="d-flex justify-content-end gap-2 mb-3">
     @can('update', $supplier)
-        <a class="btn btn-outline-primary" href="{{ route('suppliers.edit', $supplier) }}"><i class="bi bi-pencil me-1"></i>Editar</a>
+        <a class="btn btn-outline-primary github-btn" href="{{ route('suppliers.edit', $supplier) }}"><i class="bi bi-pencil me-1"></i>Editar</a>
     @endcan
 </div>
-<div class="panel p-4 mb-4">
+<div class="github-panel p-4 mb-4">
     <dl class="row mb-0">
-        <dt class="col-sm-3">Email</dt><dd class="col-sm-9">{{ $supplier->email ?: '-' }}</dd>
-        <dt class="col-sm-3">Telefono</dt><dd class="col-sm-9">{{ $supplier->phone ?: '-' }}</dd>
-        <dt class="col-sm-3">Direccion</dt><dd class="col-sm-9">{{ $supplier->address ?: '-' }}</dd>
+        <dt class="col-sm-3" style="color: #8B949E;">Email</dt><dd class="col-sm-9">{{ $supplier->email ?: '-' }}</dd>
+        <dt class="col-sm-3" style="color: #8B949E;">Telefono</dt><dd class="col-sm-9">{{ $supplier->phone ?: '-' }}</dd>
+        <dt class="col-sm-3" style="color: #8B949E;">Direccion</dt><dd class="col-sm-9">{{ $supplier->address ?: '-' }}</dd>
     </dl>
 </div>
-<div class="panel">
-    <div class="p-3 border-bottom"><h2 class="h6 mb-0">Productos del proveedor</h2></div>
+<div class="github-panel">
+    <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Productos del proveedor</h2></div>
     <div class="table-responsive">
-        <table class="table mb-0">
+        <table class="table table-hover mb-0">
             <thead><tr><th>SKU</th><th>Producto</th><th>Categoria</th><th class="text-end">Stock</th></tr></thead>
             <tbody>
             @forelse ($supplier->products as $product)

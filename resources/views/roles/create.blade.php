@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Permisos por rol aplicados por policies y middleware')
 
 @section('content')
-<div class="panel p-3 p-lg-4">
+<div class="github-panel p-3 p-lg-4">
     <form method="post" action="{{ route('roles.store') }}">
         @include('roles._form')
     </form>

@@ -5,7 +5,7 @@
 @section('page_subtitle', $category->name)
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('categories.update', $category) }}">
         @method('put')
         @include('categories._form')

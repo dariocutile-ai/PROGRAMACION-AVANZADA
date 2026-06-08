@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Actualiza stock mediante InventoryService')
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('inventory.movements.store') }}">
         @csrf
         <div class="row g-3">
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-end gap-2 mt-4">
-            <a class="btn btn-outline-secondary" href="{{ route('inventory.movements.index') }}">Cancelar</a>
-            <button class="btn btn-primary" type="submit"><i class="bi bi-save me-1"></i>Registrar</button>
+            <a class="btn btn-outline-secondary github-btn" href="{{ route('inventory.movements.index') }}">Cancelar</a>
+            <button class="btn btn-primary github-btn" type="submit"><i class="bi bi-save me-1"></i>Registrar</button>
         </div>
     </form>
 </div>

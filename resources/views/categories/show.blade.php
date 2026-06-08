@@ -7,17 +7,17 @@
 @section('content')
 <div class="d-flex justify-content-end gap-2 mb-3">
     @can('update', $category)
-        <a class="btn btn-outline-primary" href="{{ route('categories.edit', $category) }}"><i class="bi bi-pencil me-1"></i>Editar</a>
+        <a class="btn btn-outline-primary github-btn" href="{{ route('categories.edit', $category) }}"><i class="bi bi-pencil me-1"></i>Editar</a>
     @endcan
 </div>
-<div class="panel p-4 mb-4">
-    <h2 class="h6">Descripcion</h2>
+<div class="github-panel p-4 mb-4">
+    <h2 class="h6" style="color: #F0F6FC;">Descripcion</h2>
     <p class="mb-0">{{ $category->description ?: 'Sin descripcion' }}</p>
 </div>
-<div class="panel">
-    <div class="p-3 border-bottom"><h2 class="h6 mb-0">Productos de la categoria</h2></div>
+<div class="github-panel">
+    <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Productos de la categoria</h2></div>
     <div class="table-responsive">
-        <table class="table mb-0">
+        <table class="table table-hover mb-0">
             <thead><tr><th>SKU</th><th>Producto</th><th>Proveedor</th><th class="text-end">Stock</th></tr></thead>
             <tbody>
             @forelse ($category->products as $product)

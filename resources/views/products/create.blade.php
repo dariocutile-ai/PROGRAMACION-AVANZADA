@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Formulario validado contra la tabla products')
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('products.store') }}">
         @include('products._form')
     </form>

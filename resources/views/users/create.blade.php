@@ -5,7 +5,7 @@
 @section('page_subtitle', 'Alta conectada a roles reales del sistema')
 
 @section('content')
-<div class="panel p-3 p-lg-4">
+<div class="github-panel p-3 p-lg-4">
     <form method="post" action="{{ route('users.store') }}">
         @include('users._form')
     </form>

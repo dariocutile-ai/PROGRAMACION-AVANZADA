@@ -17,9 +17,7 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
+
     public function run(): void
     {
         // Users
@@ -47,11 +45,6 @@ class DatabaseSeeder extends Seeder
         $manager->roles()->sync([$managerRole->id]);
         $employee->roles()->sync([$employeeRole->id]);
 
-        // Clean domain tables to keep deterministic seeding (incluye tablas con UNIQUE)
-        // Truncates deben respetar el orden por FK.
-        // Order: primero tablas hijas, luego padre.
-        // Nota: en MySQL TRUNCATE falla si hay FK aunque la orden sea correcta.
-        // Por eso usamos delete() para evitar el error.
         InventoryMovement::query()->delete();
         Comment::query()->delete();
         Report::query()->delete();
@@ -65,7 +58,6 @@ class DatabaseSeeder extends Seeder
 
 
         // Categories & suppliers
-        // NOTE: categories.name es UNIQUE, por eso evitamos duplicados durante el seeding.
         $categories = collect();
         $target = 10;
         $safety = 0;
@@ -84,8 +76,7 @@ class DatabaseSeeder extends Seeder
                 continue;
             }
 
-            // updateOrCreate evitará violaciones UNIQUE; pero además
-            // evitamos insertar/desduplicar por ID en caso de colisiones.
+
             $persisted = Category::updateOrCreate(
                 ['name' => $name],
                 ['description' => (string) ($candidate->description ?? null)]
@@ -93,7 +84,7 @@ class DatabaseSeeder extends Seeder
 
             $categories->push($persisted);
 
-            // paranoia: recorta el bucle si el UNIQUE no deja avanzar
+
             if ($categories->count() > $target * 3) {
                 break;
             }

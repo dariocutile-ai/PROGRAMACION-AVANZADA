@@ -7,10 +7,10 @@
 @section('content')
 <div class="row g-4">
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom"><h2 class="h6 mb-0">Stock bajo</h2></div>
+        <div class="github-panel">
+            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Stock bajo</h2></div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table table-hover mb-0">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Stock</th><th class="text-end">Minimo</th></tr></thead>
                     <tbody>
                     @forelse ($lowStock as $product)
@@ -24,10 +24,10 @@
         </div>
     </div>
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom"><h2 class="h6 mb-0">Mas vendidos</h2></div>
+        <div class="github-panel">
+            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Mas vendidos</h2></div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table table-hover mb-0">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Vendidos</th></tr></thead>
                     <tbody>
                     @forelse ($mostSold as $product)
@@ -41,14 +41,14 @@
         </div>
     </div>
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom"><h2 class="h6 mb-0">Movimientos recientes</h2></div>
+        <div class="github-panel">
+            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Movimientos recientes</h2></div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table table-hover mb-0">
                     <thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th class="text-end">Cantidad</th></tr></thead>
                     <tbody>
                     @foreach ($recentMovements as $movement)
-                        <tr><td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td><td>{{ $movement->product?->name }}</td><td>{{ $movement->type }}</td><td class="text-end">{{ $movement->quantity }}</td></tr>
+                        <tr><td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td><td>{{ $movement->product?->name }}</td><td><span class="github-badge-soft">{{ $movement->type }}</span></td><td class="text-end">{{ $movement->quantity }}</td></tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -56,8 +56,8 @@
         </div>
     </div>
     <div class="col-xl-6">
-        <div class="panel">
-            <div class="p-3 border-bottom">
+        <div class="github-panel">
+            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;">
                 <form class="row g-2 align-items-end" method="get">
                     <div class="col">
                         <label class="form-label" for="category_id">Inventario por categoria</label>
@@ -68,11 +68,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-auto"><button class="btn btn-outline-secondary" type="submit"><i class="bi bi-funnel"></i></button></div>
+                    <div class="col-auto"><button class="btn btn-outline-secondary github-btn" type="submit"><i class="bi bi-funnel"></i></button></div>
                 </form>
             </div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table table-hover mb-0">
                     <thead><tr><th>Producto</th><th>Proveedor</th><th class="text-end">Stock</th><th class="text-end">Valor</th></tr></thead>
                     <tbody>
                     @foreach ($byCategory as $product)

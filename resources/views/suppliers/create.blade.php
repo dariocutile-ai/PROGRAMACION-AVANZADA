@@ -4,7 +4,7 @@
 @section('page_title', 'Nuevo proveedor')
 
 @section('content')
-<div class="panel p-4">
+<div class="github-panel p-4">
     <form method="post" action="{{ route('suppliers.store') }}">
         @include('suppliers._form')
     </form>

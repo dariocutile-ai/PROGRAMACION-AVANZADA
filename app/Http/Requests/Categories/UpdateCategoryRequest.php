@@ -13,14 +13,23 @@ class UpdateCategoryRequest extends FormRequest
 
     public function rules(): array
     {
-        /** @var int|string|null $category */
-        $category = $this->route('category');
+        /** @var int|\Illuminate\Database\Eloquent\Model|null $categoryParam */
+        $categoryParam = $this->route('category');
+
+        // En rutas de resource (Web), Laravel suele inyectar el modelo Category.
+        // En ese caso necesitamos usar el id escalar para la regla unique.
+        $categoryId = is_object($categoryParam)
+            ? ($categoryParam->id ?? null)
+            : $categoryParam;
+
+        $categoryId = $categoryId ?? 0;
 
         return [
-            'name' => ['sometimes', 'required', 'string', 'max:255', 'unique:categories,name,' . $category . ',id'],
+            'name' => ['sometimes', 'required', 'string', 'max:255', 'unique:categories,name,' . $categoryId . ',id'],
             'description' => ['nullable', 'string', 'max:2000'],
         ];
     }
+
 
     public function messages(): array
     {

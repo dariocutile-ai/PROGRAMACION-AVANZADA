@@ -5,7 +5,7 @@
 @section('page_subtitle', $user->name)
 
 @section('content')
-<div class="panel p-3 p-lg-4">
+<div class="github-panel p-3 p-lg-4">
     <form method="post" action="{{ route('users.update', $user) }}">
         @method('put')
         @include('users._form')
