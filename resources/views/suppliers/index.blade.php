@@ -21,7 +21,7 @@
 </div>
 <div class="github-panel">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead><tr><th>Proveedor</th><th>Email</th><th>Telefono</th><th class="text-end">Productos</th><th class="text-end">Acciones</th></tr></thead>
             <tbody>
             @forelse ($suppliers as $supplier)
@@ -36,7 +36,7 @@
                             <a class="btn btn-outline-primary btn-sm github-btn-icon" href="{{ route('suppliers.edit', $supplier) }}" title="Editar"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $supplier)
-                            <form class="d-inline" method="post" action="{{ route('suppliers.destroy', $supplier) }}" onsubmit="return confirm('Eliminar proveedor?')">
+                            <form class="d-inline" method="post" action="{{ route('suppliers.destroy', $supplier) }}" data-confirm="¿Desea eliminar el proveedor {{ $supplier->name }}?">
                                 @csrf @method('delete')
                                 <button class="btn btn-outline-danger btn-sm github-btn-icon" type="submit" title="Eliminar"><i class="bi bi-trash"></i></button>
                             </form>

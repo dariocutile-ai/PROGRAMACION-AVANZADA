@@ -19,7 +19,7 @@
                         <a class="btn btn-outline-primary btn-sm github-btn-icon" title="Editar" href="{{ route('roles.edit', $role) }}"><i class="bi bi-pencil"></i></a>
                     @endcan
                     @can('delete', $role)
-                        <form method="post" action="{{ route('roles.destroy', $role) }}" onsubmit="return confirm('Eliminar rol?')">
+                        <form method="post" action="{{ route('roles.destroy', $role) }}" data-confirm="¿Desea eliminar el rol {{ $role->name }}?">
                             @csrf @method('delete')
                             <button class="btn btn-outline-danger btn-sm github-btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
                         </form>
@@ -41,7 +41,7 @@
         <div class="github-panel">
             <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Usuarios con este rol</h2></div>
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Usuario</th><th>Email</th></tr></thead>
                     <tbody>
                     @forelse ($role->users as $user)

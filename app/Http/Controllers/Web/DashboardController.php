@@ -17,6 +17,20 @@ class DashboardController extends Controller
     {
         Gate::authorize('viewAny', Product::class);
 
+        // Get stock by category for charts
+        $categories = Category::with('products')
+            ->has('products')
+            ->get()
+            ->map(function ($category) {
+                return [
+                    'name' => $category->name,
+                    'stock' => $category->products->sum('stock')
+                ];
+            });
+
+        $categoryLabels = $categories->pluck('name')->toArray();
+        $categoryStock = $categories->pluck('stock')->toArray();
+
         return view('dashboard.index', [
             'totals' => [
                 'products' => Product::count(),
@@ -37,6 +51,8 @@ class DashboardController extends Controller
                 ->latest()
                 ->limit(8)
                 ->get(),
+            'categoryLabels' => $categoryLabels,
+            'categoryStock' => $categoryStock,
         ]);
     }
 }

@@ -31,7 +31,7 @@
 
 <div class="github-panel">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead>
             <tr>
                 <th>Usuario</th>
@@ -61,7 +61,7 @@
                             <a class="btn btn-outline-primary btn-sm github-btn-icon" title="Editar" href="{{ route('users.edit', $user) }}"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $user)
-                            <form class="d-inline" method="post" action="{{ route('users.destroy', $user) }}" onsubmit="return confirm('Eliminar usuario?')">
+                            <form class="d-inline" method="post" action="{{ route('users.destroy', $user) }}" data-confirm="¿Desea eliminar el usuario {{ $user->name }}?">
                                 @csrf @method('delete')
                                 <button class="btn btn-outline-danger btn-sm github-btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
                             </form>

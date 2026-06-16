@@ -10,7 +10,7 @@
         <div class="github-panel">
             <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Stock bajo</h2></div>
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Stock</th><th class="text-end">Minimo</th></tr></thead>
                     <tbody>
                     @forelse ($lowStock as $product)
@@ -27,7 +27,7 @@
         <div class="github-panel">
             <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Mas vendidos</h2></div>
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Vendidos</th></tr></thead>
                     <tbody>
                     @forelse ($mostSold as $product)
@@ -44,7 +44,7 @@
         <div class="github-panel">
             <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Movimientos recientes</h2></div>
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th class="text-end">Cantidad</th></tr></thead>
                     <tbody>
                     @foreach ($recentMovements as $movement)
@@ -72,7 +72,7 @@
                 </form>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Producto</th><th>Proveedor</th><th class="text-end">Stock</th><th class="text-end">Valor</th></tr></thead>
                     <tbody>
                     @foreach ($byCategory as $product)

@@ -40,10 +40,10 @@
 
 <div class="github-panel">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead>
             <tr>
-                <th>SKU</th><th>Producto</th><th>Categoria</th><th>Proveedor</th>
+                <th>SKU</th><th>Producto</th><th>Categoría</th><th>Proveedor</th>
                 <th class="text-end">Stock</th><th class="text-end">Precio venta</th><th class="text-end">Acciones</th>
             </tr>
             </thead>
@@ -67,7 +67,7 @@
                             <a class="btn btn-outline-primary btn-sm github-btn-icon" title="Editar" href="{{ route('products.edit', $product) }}"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $product)
-                            <form class="d-inline" method="post" action="{{ route('products.destroy', $product) }}" onsubmit="return confirm('Eliminar producto?')">
+                            <form class="d-inline" method="post" action="{{ route('products.destroy', $product) }}" data-confirm="¿Desea eliminar el producto {{ $product->name }}?">
                                 @csrf @method('delete')
                                 <button class="btn btn-outline-danger btn-sm github-btn-icon" title="Eliminar" type="submit"><i class="bi bi-trash"></i></button>
                             </form>

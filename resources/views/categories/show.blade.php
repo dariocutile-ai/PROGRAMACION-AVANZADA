@@ -17,7 +17,7 @@
 <div class="github-panel">
     <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Productos de la categoria</h2></div>
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead><tr><th>SKU</th><th>Producto</th><th>Proveedor</th><th class="text-end">Stock</th></tr></thead>
             <tbody>
             @forelse ($category->products as $product)

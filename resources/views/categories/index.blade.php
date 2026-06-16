@@ -21,7 +21,7 @@
 </div>
 <div class="github-panel">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead><tr><th>Nombre</th><th>Descripcion</th><th class="text-end">Productos</th><th class="text-end">Acciones</th></tr></thead>
             <tbody>
             @forelse ($categories as $category)
@@ -35,7 +35,7 @@
                             <a class="btn btn-outline-primary btn-sm github-btn-icon" href="{{ route('categories.edit', $category) }}" title="Editar"><i class="bi bi-pencil"></i></a>
                         @endcan
                         @can('delete', $category)
-                            <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}" onsubmit="return confirm('Eliminar categoria?')">
+                            <form class="d-inline" method="post" action="{{ route('categories.destroy', $category) }}" data-confirm="¿Desea eliminar la categoría {{ $category->name }}?">
                                 @csrf @method('delete')
                                 <button class="btn btn-outline-danger btn-sm github-btn-icon" type="submit" title="Eliminar"><i class="bi bi-trash"></i></button>
                             </form>

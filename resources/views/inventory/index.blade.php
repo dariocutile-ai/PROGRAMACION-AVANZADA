@@ -39,7 +39,7 @@
 </div>
 <div class="github-panel">
     <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 data-table">
             <thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th class="text-end">Cantidad</th><th class="text-end">Costo</th><th>Usuario</th><th></th></tr></thead>
             <tbody>
             @forelse ($movements as $movement)
