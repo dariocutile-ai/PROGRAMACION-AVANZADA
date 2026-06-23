@@ -53,13 +53,21 @@
                     <td class="fw-semibold">{{ $product->sku }}</td>
                     <td>
                         <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
-                        @if ($product->stock <= $product->reorder_level)
-                            <span class="github-badge-soft ms-1" style="color: #E3B341; border-color: #E3B341;">Stock bajo</span>
+                        @if ($product->stock == 0)
+                            <span class="github-badge-soft ms-1" style="color: #fff; background: #DA3633; border-color: #DA3633;"><i class="bi bi-x-circle"></i> Agotado</span>
+                        @elseif ($product->stock <= $product->reorder_level)
+                            <span class="github-badge-soft ms-1" style="color: #E3B341; border-color: #E3B341;"><i class="bi bi-exclamation-triangle"></i> Stock bajo</span>
                         @endif
                     </td>
                     <td>{{ $product->category?->name }}</td>
                     <td>{{ $product->supplier?->name }}</td>
-                    <td class="text-end">{{ $product->stock }}</td>
+                    <td class="text-end">
+                        @if ($product->stock == 0)
+                            <span class="badge bg-danger">0</span>
+                        @else
+                            {{ $product->stock }}
+                        @endif
+                    </td>
                     <td class="text-end">${{ number_format((float) $product->sale_price, 2) }}</td>
                     <td class="text-end">
                         <a class="btn btn-outline-secondary btn-sm github-btn-icon" title="Ver" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a>

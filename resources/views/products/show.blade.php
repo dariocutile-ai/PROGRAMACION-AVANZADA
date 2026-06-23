@@ -36,7 +36,7 @@
                     @forelse ($product->inventoryMovements->sortByDesc('created_at') as $movement)
                         <tr>
                             <td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td>
-                            <td><span class="github-badge-soft">{{ $movement->type }}</span></td>
+                            <td><span class="github-badge-soft">{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$movement->type] ?? $movement->type }}</span></td>
                             <td class="text-end">{{ $movement->quantity }}</td>
                             <td>{{ $movement->user?->name ?? 'Sistema' }}</td>
                         </tr>

@@ -58,5 +58,18 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Report::class, ReportPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Role::class, RolePolicy::class);
+
+        // Registrar Observer para Auditoria
+        Product::observe(\App\Observers\AuditObserver::class);
+        Category::observe(\App\Observers\AuditObserver::class);
+        Supplier::observe(\App\Observers\AuditObserver::class);
+        InventoryMovement::observe(\App\Observers\AuditObserver::class);
+        User::observe(\App\Observers\AuditObserver::class);
+        Role::observe(\App\Observers\AuditObserver::class);
+
+        // Registrar Listeners para Eventos de Auth
+        \Illuminate\Support\Facades\Event::listen(\Illuminate\Auth\Events\Login::class, [\App\Listeners\AuthAuditListener::class, 'handleLogin']);
+        \Illuminate\Support\Facades\Event::listen(\Illuminate\Auth\Events\Logout::class, [\App\Listeners\AuthAuditListener::class, 'handleLogout']);
+        \Illuminate\Support\Facades\Event::listen(\Illuminate\Auth\Events\Failed::class, [\App\Listeners\AuthAuditListener::class, 'handleFailed']);
     }
 }

@@ -63,7 +63,14 @@
                     <a class="nav-link github-nav {{ request()->routeIs('roles.*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
                         <i class="bi bi-shield-lock me-2"></i><span>Roles</span>
                     </a>
+                    <a class="nav-link github-nav {{ request()->routeIs('audit.*') ? 'active' : '' }}" href="{{ route('audit.index') }}">
+                        <i class="bi bi-journal-code me-2"></i><span>Logs Seguridad</span>
+                    </a>
                 @endcan
+                <hr class="border-secondary my-1">
+                <a class="nav-link github-nav {{ request()->routeIs('help.*') ? 'active' : '' }}" href="{{ route('help.index') }}">
+                    <i class="bi bi-question-circle me-2"></i><span>Ayuda</span>
+                </a>
             </nav>
         </aside>
     @endauth
@@ -104,19 +111,28 @@
 
         <div class="content-wrap mx-auto px-3 px-lg-4 py-4 flex-fill" style="max-width: 1440px;">
             @if (session('success'))
-                <div class="alert alert-success github-alert">{{ session('success') }}</div>
+                <div class="alert alert-success github-alert shadow-sm mb-4">
+                    <i class="bi bi-check-circle-fill fs-5 text-success"></i>
+                    <div>{{ session('success') }}</div>
+                </div>
             @endif
             @if (session('status'))
-                <div class="alert alert-info github-alert">{{ session('status') }}</div>
+                <div class="alert alert-info github-alert shadow-sm mb-4">
+                    <i class="bi bi-info-circle-fill fs-5 text-info"></i>
+                    <div>{{ session('status') }}</div>
+                </div>
             @endif
             @if ($errors->any())
-                <div class="alert alert-danger github-alert">
-                    <strong>Revisa los datos enviados.</strong>
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="alert alert-danger github-alert shadow-sm mb-4">
+                    <i class="bi bi-exclamation-triangle-fill fs-5 text-danger"></i>
+                    <div>
+                        <strong class="d-block mb-1">Revisa los datos enviados:</strong>
+                        <ul class="mb-0 ps-3">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             @endif
             @yield('content')
@@ -143,18 +159,19 @@
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // Sidebar toggle functionality
     let sidebarCollapsed = false;
-    
+
     function toggleSidebar() {
         const sidebar = document.querySelector('.sidebar');
         const main = document.querySelector('main');
         const toggleIcon = document.getElementById('toggle-icon');
         const body = document.body;
-        
+
         sidebarCollapsed = !sidebarCollapsed;
-        
+
         if (sidebarCollapsed) {
             body.classList.add('sidebar-collapsed');
             toggleIcon.classList.remove('bi-list');
@@ -186,19 +203,35 @@
             });
         });
 
-        // Initialize SweetAlert2 for form confirmations
-        const confirmForms = document.querySelectorAll('form[onsubmit*="confirm"]');
+        // Initialize SweetAlert2 for all destructive forms using data-confirm attribute
+        const confirmForms = document.querySelectorAll('form[data-confirm]');
         confirmForms.forEach(function(form) {
             form.addEventListener('submit', function(e) {
-                const confirmMsg = form.getAttribute('onsubmit');
-                if (confirmMsg && confirmMsg.includes('confirm')) {
-                    const message = confirmMsg.replace('return confirm(\'', '').replace('\')', '');
-                    if (confirm(message)) {
+                e.preventDefault();
+                const message = form.getAttribute('data-confirm');
+                
+                Swal.fire({
+                    title: '¿Confirmar Acción?',
+                    text: message,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#EF4444',
+                    cancelButtonColor: '#30363D',
+                    confirmButtonText: 'Sí, continuar',
+                    cancelButtonText: 'Cancelar',
+                    background: '#131720',
+                    color: '#F8F9FA',
+                    customClass: {
+                        popup: 'github-panel',
+                        confirmButton: 'btn btn-danger',
+                        cancelButton: 'btn btn-outline-secondary'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
                         form.submit();
-                    } else {
-                        e.preventDefault();
                     }
-                }
+                });
             });
         });
     });

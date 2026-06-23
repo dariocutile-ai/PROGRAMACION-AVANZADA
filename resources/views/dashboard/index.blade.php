@@ -75,7 +75,13 @@
                         <tr>
                             <td><a href="{{ route('products.show', $product) }}">{{ $product->name }}</a><div class="small text-muted">{{ $product->sku }}</div></td>
                             <td>{{ $product->category?->name }}</td>
-                            <td class="text-end"><span class="badge bg-danger">{{ $product->stock }}</span></td>
+                            <td class="text-end">
+                                @if($product->stock == 0)
+                                    <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Agotado (0)</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">{{ $product->stock }}</span>
+                                @endif
+                            </td>
                             <td class="text-end">{{ $product->reorder_level }}</td>
                         </tr>
                     @empty
@@ -101,7 +107,7 @@
                     @forelse ($recentMovements as $movement)
                         <tr>
                             <td><a href="{{ route('inventory.movements.show', $movement) }}">{{ $movement->product?->name }}</a></td>
-                            <td><span class="github-badge-soft">{{ $movement->type }}</span></td>
+                            <td><span class="github-badge-soft">{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$movement->type] ?? $movement->type }}</span></td>
                             <td class="text-end">{{ $movement->quantity }}</td>
                             <td>{{ $movement->user?->name ?? 'Sistema' }}</td>
                         </tr>

@@ -8,7 +8,13 @@
 <div class="row g-4">
     <div class="col-xl-6">
         <div class="github-panel">
-            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Stock bajo</h2></div>
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center" style="border-bottom-color: #30363D;">
+                <h2 class="h6 mb-0" style="color: #F0F6FC;">Stock bajo</h2>
+                <div>
+                    <a href="{{ route('reports.pdf.lowStock') }}" class="btn btn-sm btn-outline-danger"><i class="bi bi-file-pdf"></i> PDF</a>
+                    <a href="{{ route('reports.excel.lowStock') }}" class="btn btn-sm btn-outline-success"><i class="bi bi-file-excel"></i> Excel</a>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Stock</th><th class="text-end">Minimo</th></tr></thead>
@@ -25,7 +31,9 @@
     </div>
     <div class="col-xl-6">
         <div class="github-panel">
-            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Mas vendidos</h2></div>
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center" style="border-bottom-color: #30363D;">
+                <h2 class="h6 mb-0" style="color: #F0F6FC;">Mas vendidos</h2>
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Producto</th><th>Categoria</th><th class="text-end">Vendidos</th></tr></thead>
@@ -42,13 +50,19 @@
     </div>
     <div class="col-xl-6">
         <div class="github-panel">
-            <div class="p-3 border-bottom" style="border-bottom-color: #30363D;"><h2 class="h6 mb-0" style="color: #F0F6FC;">Movimientos recientes</h2></div>
+            <div class="p-3 border-bottom d-flex justify-content-between align-items-center" style="border-bottom-color: #30363D;">
+                <h2 class="h6 mb-0" style="color: #F0F6FC;">Movimientos recientes</h2>
+                <div>
+                    <a href="{{ route('reports.pdf.movements') }}" class="btn btn-sm btn-outline-danger"><i class="bi bi-file-pdf"></i> PDF</a>
+                    <a href="{{ route('reports.excel.movements') }}" class="btn btn-sm btn-outline-success"><i class="bi bi-file-excel"></i> Excel</a>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0 data-table">
                     <thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th class="text-end">Cantidad</th></tr></thead>
                     <tbody>
                     @foreach ($recentMovements as $movement)
-                        <tr><td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td><td>{{ $movement->product?->name }}</td><td><span class="github-badge-soft">{{ $movement->type }}</span></td><td class="text-end">{{ $movement->quantity }}</td></tr>
+                        <tr><td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td><td>{{ $movement->product?->name }}</td><td><span class="github-badge-soft">{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$movement->type] ?? $movement->type }}</span></td><td class="text-end">{{ $movement->quantity }}</td></tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -69,6 +83,10 @@
                         </select>
                     </div>
                     <div class="col-auto"><button class="btn btn-outline-secondary github-btn" type="submit"><i class="bi bi-funnel"></i></button></div>
+                    <div class="col-auto ms-auto">
+                        <a href="{{ route('reports.pdf.byCategory', request()->query()) }}" class="btn btn-outline-danger github-btn"><i class="bi bi-file-pdf"></i> PDF</a>
+                        <a href="{{ route('reports.excel.byCategory', request()->query()) }}" class="btn btn-outline-success github-btn"><i class="bi bi-file-excel"></i> Excel</a>
+                    </div>
                 </form>
             </div>
             <div class="table-responsive">

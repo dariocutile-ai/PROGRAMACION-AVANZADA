@@ -16,7 +16,7 @@
             <select class="form-select" id="type" name="type">
                 <option value="">Todos</option>
                 @foreach ($types as $type)
-                    <option value="{{ $type }}" @selected(request('type') === $type)>{{ $type }}</option>
+                    <option value="{{ $type }}" @selected(request('type') === $type)>{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$type] ?? $type }}</option>
                 @endforeach
             </select>
         </div>
@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{ $movement->created_at?->format('Y-m-d H:i') }}</td>
                     <td><a href="{{ route('products.show', $movement->product) }}">{{ $movement->product?->name }}</a><div class="small text-muted">{{ $movement->product?->sku }}</div></td>
-                    <td><span class="github-badge-soft">{{ $movement->type }}</span></td>
+                    <td><span class="github-badge-soft">{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$movement->type] ?? $movement->type }}</span></td>
                     <td class="text-end">{{ $movement->quantity }}</td>
                     <td class="text-end">${{ number_format((float) $movement->unit_cost, 2) }}</td>
                     <td>{{ $movement->user?->name ?? 'Sistema' }}</td>

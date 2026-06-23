@@ -24,7 +24,7 @@
                 <label class="form-label" for="type">Tipo</label>
                 <select class="form-select" id="type" name="type" required>
                     @foreach ($types as $type)
-                        <option value="{{ $type }}" @selected(old('type') === $type)>{{ $type }}</option>
+                        <option value="{{ $type }}" @selected(old('type') === $type)>{{ ['purchase'=>'Compra','restock'=>'Reabastecimiento','sale'=>'Venta','waste'=>'Merma'][$type] ?? $type }}</option>
                     @endforeach
                 </select>
             </div>
